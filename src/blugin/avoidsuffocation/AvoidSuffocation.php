@@ -27,11 +27,11 @@ declare(strict_types=1);
 
 namespace blugin\avoidsuffocation;
 
-use pocketmine\block\BlockLegacyIds;
+use pocketmine\block\BlockIds;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\Listener;
-use pocketmine\math\Facing;
-use pocketmine\player\Player;
+use pocketmine\math\Vector3;
+use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 
 class AvoidSuffocation extends PluginBase implements Listener{
@@ -52,12 +52,17 @@ class AvoidSuffocation extends PluginBase implements Listener{
         if(!$entity instanceof Player)
             return;
 
-        $world = $entity->getWorld();
+        $world = $entity->getLevel();
         $vec = $entity->getPosition()->floor();
-        foreach(Facing::HORIZONTAL as $_ => $face){
+        foreach([
+            Vector3::SIDE_NORTH,
+            Vector3::SIDE_SOUTH,
+            Vector3::SIDE_WEST,
+            Vector3::SIDE_EAST
+        ] as $_ => $face){
             $blockVec = $vec->getSide($face);
-            if($world->getBlock($blockVec->up())->getId() === BlockLegacyIds::AIR && $world->getBlock($blockVec)->getId() === BlockLegacyIds::AIR){
-                $entity->setMotion($blockVec->subtractVector($vec)->multiply(0.1));
+            if($world->getBlock($blockVec->up())->getId() === BlockIds::AIR && $world->getBlock($blockVec)->getId() === BlockIds::AIR){
+                $entity->setMotion($blockVec->subtract($vec)->multiply(0.1));
                 $event->setCancelled();
                 return;
             }
