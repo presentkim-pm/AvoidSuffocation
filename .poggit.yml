@@ -1,0 +1,8 @@
+---
+branches:
+- main
+projects:
+  AvoidSuffocation:
+    path: ""
+    icon: "assets/icon.png"
+...
