@@ -27,10 +27,11 @@ declare(strict_types=1);
 
 namespace kim\present\avoidsuffocation;
 
-use pocketmine\block\BlockIds;
+use pocketmine\block\BlockTypeIds;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\Listener;
-use pocketmine\math\Vector3;
+use pocketmine\math\Facing;
+use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 
 class AvoidSuffocation extends PluginBase implements Listener{
@@ -38,31 +39,24 @@ class AvoidSuffocation extends PluginBase implements Listener{
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
-    /**
-     * @priority HIGHEST
-     *
-     * @param EntityDamageEvent $event
-     */
+    /** @priority HIGHEST */
     public function onEntityDamageEvent(EntityDamageEvent $event) : void{
-        if($event->getCause() !== EntityDamageEvent::CAUSE_SUFFOCATION)
+        if($event->getCause() !== EntityDamageEvent::CAUSE_SUFFOCATION){
             return;
+        }
 
         $entity = $event->getEntity();
-        if(!$entity instanceof Player)
+        if(!$entity instanceof Player){
             return;
+        }
 
-        $world = $entity->getLevel();
-        $vec = $entity->getPosition()->floor();
-        foreach([
-            Vector3::SIDE_NORTH,
-            Vector3::SIDE_SOUTH,
-            Vector3::SIDE_WEST,
-            Vector3::SIDE_EAST
-        ] as $_ => $face){
-            $blockVec = $vec->getSide($face);
-            if($world->getBlock($blockVec->up())->getId() === BlockIds::AIR && $world->getBlock($blockVec)->getId() === BlockIds::AIR){
-                $entity->setMotion($blockVec->subtract($vec)->multiply(0.1));
-                $event->setCancelled();
+        $world = $entity->getWorld();
+        $pos = $entity->getPosition();
+        foreach(Facing::HORIZONTAL as $face){
+            $blockVec = $pos->getSide($face);
+            if($world->getBlock($blockVec->up())->getTypeId() === BlockTypeIds::AIR && $world->getBlock($blockVec)->getTypeId() === BlockTypeIds::AIR){
+                $entity->setMotion($blockVec->subtractVector($pos)->multiply(0.1));
+                $event->cancel();
                 return;
             }
         }

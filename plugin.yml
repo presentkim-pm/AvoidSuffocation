@@ -2,7 +2,7 @@
 name: AvoidSuffocation
 main: kim\present\avoidsuffocation\AvoidSuffocation
 version: 1.0.0
-api: [3.0.0]
+api: [5.0.0]
 author: PresentKim
 description: Automatically avoiding suffocation to sideways!
 ...
