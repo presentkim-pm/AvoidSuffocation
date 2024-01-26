@@ -1,8 +1,8 @@
 ---
 name: AvoidSuffocation
-main: blugin\avoidsuffocation\AvoidSuffocation
+main: kim\present\avoidsuffocation\AvoidSuffocation
 version: 1.0.0
 api: [3.0.0]
-authors: ['Blugin-team', 'PresentKim']
+authors: PresentKim
 description: Automatically avoiding suffocation to sideways!
 ...
