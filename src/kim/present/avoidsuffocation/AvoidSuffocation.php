@@ -36,6 +36,15 @@ use pocketmine\plugin\PluginBase;
 
 class AvoidSuffocation extends PluginBase implements Listener{
     public function onEnable() : void{
+        /**
+         * This is a plugin that does not use data folders.
+         * Delete the unnecessary data folder of this plugin for users.
+         */
+        $dataFolder = $this->getDataFolder();
+        if(is_dir($dataFolder) && count(scandir($dataFolder)) <= 2){
+            rmdir($dataFolder);
+        }
+
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
