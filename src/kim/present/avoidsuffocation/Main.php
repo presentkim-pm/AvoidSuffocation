@@ -35,7 +35,7 @@ use pocketmine\math\Facing;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 
-class AvoidSuffocation extends PluginBase implements Listener{
+class Main extends PluginBase implements Listener{
 	public function onEnable() : void{
 		PluginDataFolderEraser::erase($this);
 
