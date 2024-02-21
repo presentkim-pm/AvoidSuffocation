@@ -27,6 +27,7 @@ declare(strict_types=1);
 
 namespace kim\present\avoidsuffocation;
 
+use kim\present\removeplugindatafolder\PluginDataFolderEraser;
 use pocketmine\block\BlockTypeIds;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\Listener;
@@ -34,21 +35,9 @@ use pocketmine\math\Facing;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 
-use function count;
-use function is_dir;
-use function rmdir;
-use function scandir;
-
 class AvoidSuffocation extends PluginBase implements Listener{
 	public function onEnable() : void{
-		/**
-		 * This is a plugin that does not use data folders.
-		 * Delete the unnecessary data folder of this plugin for users.
-		 */
-		$dataFolder = $this->getDataFolder();
-		if(is_dir($dataFolder) && count(scandir($dataFolder)) <= 2){
-			rmdir($dataFolder);
-		}
+		PluginDataFolderEraser::erase($this);
 
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
