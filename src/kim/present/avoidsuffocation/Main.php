@@ -36,35 +36,36 @@ use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase implements Listener{
-	public function onEnable() : void{
-		PluginDataFolderEraser::erase($this);
 
-		$this->getServer()->getPluginManager()->registerEvents($this, $this);
-	}
+    public function onEnable() : void{
+        PluginDataFolderEraser::erase($this);
 
-	/** @priority HIGHEST */
-	public function onEntityDamageEvent(EntityDamageEvent $event) : void{
-		if($event->getCause() !== EntityDamageEvent::CAUSE_SUFFOCATION){
-			return;
-		}
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+    }
 
-		$entity = $event->getEntity();
-		if(!$entity instanceof Player){
-			return;
-		}
+    /** @priority HIGHEST */
+    public function onEntityDamageEvent(EntityDamageEvent $event) : void{
+        if($event->getCause() !== EntityDamageEvent::CAUSE_SUFFOCATION){
+            return;
+        }
 
-		$world = $entity->getWorld();
-		$pos = $entity->getPosition();
-		foreach(Facing::HORIZONTAL as $face){
-			$blockVec = $pos->getSide($face);
-			if(
-				$world->getBlock($blockVec->up())->getTypeId() === BlockTypeIds::AIR
-				&& $world->getBlock($blockVec)->getTypeId() === BlockTypeIds::AIR
-			){
-				$entity->setMotion($blockVec->subtractVector($pos)->multiply(0.1));
-				$event->cancel();
-				return;
-			}
-		}
-	}
+        $entity = $event->getEntity();
+        if(!$entity instanceof Player){
+            return;
+        }
+
+        $world = $entity->getWorld();
+        $pos = $entity->getPosition();
+        foreach(Facing::HORIZONTAL as $face){
+            $blockVec = $pos->getSide($face);
+            if(
+                $world->getBlock($blockVec->up())->getTypeId() === BlockTypeIds::AIR
+                && $world->getBlock($blockVec)->getTypeId() === BlockTypeIds::AIR
+            ){
+                $entity->setMotion($blockVec->subtractVector($pos)->multiply(0.1));
+                $event->cancel();
+                return;
+            }
+        }
+    }
 }
