@@ -35,9 +35,9 @@ use pocketmine\math\Facing;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 
-class Main extends PluginBase implements Listener{
+final class Main extends PluginBase implements Listener{
 
-    public function onEnable() : void{
+    protected function onEnable() : void{
         PluginDataFolderEraser::erase($this);
 
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
