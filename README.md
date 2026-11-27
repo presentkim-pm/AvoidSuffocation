@@ -11,10 +11,10 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <img src="https://raw.githubusercontent.com/presentkim-pm/AvoidSuffocation/main/assets/icon.png" alt="Logo" width="80" height="80">
+  <img src="https://raw.githubusercontent.com/presentkim-pm/avoidsuffocation/main/assets/icon.png" alt="Logo" width="80" height="80">
   <h3>AvoidSuffocation</h3>
   <p align="center">
-    An plugin that make automatically avoiding suffocation to sideways!
+    A plugin that automatically avoids suffocation to the side! (axolotl-pm/PocketMine-MP 5.x)
 
 [Contact to me][author-discord] · [Report a bug][issues-url] · [Request a feature][issues-url]
 
@@ -24,81 +24,56 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## About The Project
+### Overview
 
 Have you ever suffocated because you couldn't find the exit after being buried in sand or gravel?
-Now, automatically escape to the side if there is an blank!
+Now, automatically escape to the side if there is an empty space!
 
-:heavy_check_mark: Automatically avoiding suffocation to sideways
+- When a player would take suffocation damage, the plugin looks at the four horizontal neighbours for a spot with two air blocks (feet and head), cancels the damage and pushes the player towards it.
+- Does nothing for entities other than players, and when no side is free.
+- No commands, permissions or configuration.
 
-##
+---
 
------
+### Installation & Requirements
 
-## Target software:
+- **Server**
+  - [axolotl-pm/PocketMine-MP](https://github.com/axolotl-pm/PocketMine-MP) `5.51` or higher (`plugin.yml` `api: [5.51.0]`),
+    which uses BedrockProtocol 64 (Bedrock `1.26.60`).
+  - PHP `8.4` or higher.
+- **Installation**
+  - Download `AvoidSuffocation.phar` from [GitHub Releases][releases-url] and place it into your server's `plugins` directory.
+  - Restart the server; the plugin will load automatically according to `plugin.yml`.
+- **Old versions**
+  - The version for the original [pmmp/PocketMine-MP](https://github.com/pmmp/PocketMine-MP) `5.x` (up to `5.44`,
+    Poggit releases) is kept on the [`legacy/pmmp-5.44`](https://github.com/presentkim-pm/avoidsuffocation/tree/legacy/pmmp-5.44) branch.
+- **Development**
+  - `composer install` then `composer test` runs the PHPUnit tests.
 
-This plugin officially only works with [`Pocketmine-MP`](https://github.com/pmmp/PocketMine-MP/).
+---
 
-##
-
------
-
-## Downloads
-
-### Download from [Github Releases][releases-url]
-
-[![Github Downloads][release-badge]][releases-url]
-
-##
-
------
-
-## Installation
-
-1) Download plugin `.phar` releases
-2) Move downloaded `.phar` file to server's **/plugins/** folder
-3) Restart the server
-
-##
-
------
-
-## License
+### License
 
 Distributed under the **LGPL 3.0**. See [LICENSE][license-url] for more information
-
-##
 
 -----
 
 [author-discord]: https://discordapp.com/users/345772340279508993
 
-[poggit-ci-badge]: https://poggit.pmmp.io/ci.shield/presentkim-pm/AvoidSuffocation/AvoidSuffocation?style=for-the-badge
+[version-badge]: https://img.shields.io/github/v/release/presentkim-pm/avoidsuffocation?display_name=tag&style=for-the-badge&label=VERSION
 
-[poggit-version-badge]: https://poggit.pmmp.io/shield.api/AvoidSuffocation?style=for-the-badge
+[release-badge]: https://img.shields.io/github/downloads/presentkim-pm/avoidsuffocation/total?style=for-the-badge&label=GITHUB%20
 
-[poggit-downloads-badge]: https://poggit.pmmp.io/shield.dl.total/AvoidSuffocation?style=for-the-badge
+[stars-badge]: https://img.shields.io/github/stars/presentkim-pm/avoidsuffocation.svg?style=for-the-badge
 
-[version-badge]: https://img.shields.io/github/v/release/presentkim-pm/AvoidSuffocation?display_name=tag&style=for-the-badge&label=VERSION
+[license-badge]: https://img.shields.io/github/license/presentkim-pm/avoidsuffocation.svg?style=for-the-badge
 
-[release-badge]: https://img.shields.io/github/downloads/presentkim-pm/AvoidSuffocation/total?style=for-the-badge&label=GITHUB%20
+[stars-url]: https://github.com/presentkim-pm/avoidsuffocation/stargazers
 
-[stars-badge]: https://img.shields.io/github/stars/presentkim-pm/AvoidSuffocation.svg?style=for-the-badge
+[releases-url]: https://github.com/presentkim-pm/avoidsuffocation/releases
 
-[license-badge]: https://img.shields.io/github/license/presentkim-pm/AvoidSuffocation.svg?style=for-the-badge
+[issues-url]: https://github.com/presentkim-pm/avoidsuffocation/issues
 
-[poggit-ci-url]: https://poggit.pmmp.io/ci/presentkim-pm/AvoidSuffocation/AvoidSuffocation
+[license-url]: https://github.com/presentkim-pm/avoidsuffocation/blob/main/LICENSE
 
-[poggit-release-url]: https://poggit.pmmp.io/p/AvoidSuffocation
-
-[stars-url]: https://github.com/presentkim-pm/AvoidSuffocation/stargazers
-
-[releases-url]: https://github.com/presentkim-pm/AvoidSuffocation/releases
-
-[issues-url]: https://github.com/presentkim-pm/AvoidSuffocation/issues
-
-[license-url]: https://github.com/presentkim-pm/AvoidSuffocation/blob/main/LICENSE
-
-[project-icon]: https://raw.githubusercontent.com/presentkim-pm/AvoidSuffocation/main/assets/icon.png
-
-[project-preview]: https://raw.githubusercontent.com/presentkim-pm/AvoidSuffocation/main/assets/preview.gif
+[project-icon]: https://raw.githubusercontent.com/presentkim-pm/avoidsuffocation/main/assets/icon.png
